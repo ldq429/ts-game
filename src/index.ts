@@ -1,65 +1,74 @@
 import { Square } from "./core/Square";
 import { BroswerLog } from "./core/views/BroswerLog";
-import { IPoint } from "./core/types";
-import { SquareGroup } from "./core/SquareGroup";
-
+import { IPoint, Direction } from "./core/types";
+import { createSquareGroup } from './core/Teris';
+import { TerisRule } from './core/TerisRule';
+import { IpcNetConnectOpts } from "net";
 /*
  * @Author: your name
  * @Date: 2020-05-24 09:35:32
- * @LastEditTime: 2020-05-28 21:10:46
+ * @LastEditTime: 2020-05-30 10:21:48
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/index.js
  */
-const squareGroup = new SquareGroup([
-    { x: 0, y: -1 },
-    { x: -1, y: 0 },
-    { x: 0, y: 0 },
-    { x: 1, y: 0 }
-], { x: 2, y: 2 }, '#FF00FF');
+const squareGroup = createSquareGroup({ x: 3, y: 3 });
 
 squareGroup.squareGroup.forEach(sq => {
     const root: HTMLElement = document.getElementById('root') as HTMLElement;
     sq.view = new BroswerLog(sq, root);
 })
 
-let moveLeft: HTMLElement = document.getElementById('moveLeft') as HTMLElement;
-let moveDown: HTMLElement = document.getElementById('moveDown') as HTMLElement;
-let moveRight: HTMLElement = document.getElementById('moveRight') as HTMLElement;
+/**
+ * 获取dom元素 进而监听
+ */
+const moveLeft: HTMLElement = document.getElementById('moveLeft') as HTMLElement;
+const moveDown: HTMLElement = document.getElementById('moveDown') as HTMLElement;
+const moveRight: HTMLElement = document.getElementById('moveRight') as HTMLElement;
+
+
 
 
 moveLeft.addEventListener('click', function () {
     /**
      * 更改中心点坐标
      */
-    squareGroup.pointCenter = {
-        ...squareGroup.pointCenter,
-        x: squareGroup.pointCenter.x - 1
-    };
 
-})
-
-moveDown.addEventListener('click', function () {
-    /**
-     * 更改中心点坐标
-     */
-    squareGroup.pointCenter = {
-        ...squareGroup.pointCenter,
-        y: squareGroup.pointCenter.y + 1
-    };
-
+    // 下一个目标中心点
+    // const targetPoint: IPoint = {
+    //     ...squareGroup.pointCenter,
+    //     x: squareGroup.pointCenter.x - 1
+    // };
+    // TerisRule.move(squareGroup, targetPoint);
+    TerisRule.move(squareGroup, Direction.left);
 })
 
 moveRight.addEventListener('click', function () {
     /**
      * 更改中心点坐标
      */
-    squareGroup.pointCenter = {
-        ...squareGroup.pointCenter,
-        x: squareGroup.pointCenter.x + 1
-    };
-
+    // const targetPoint: IPoint = {
+    //     ...squareGroup.pointCenter,
+    //     x: squareGroup.pointCenter.x + 1
+    // };
+    // TerisRule.move(squareGroup, targetPoint);
+    TerisRule.move(squareGroup, Direction.right);
 })
+
+moveDown.addEventListener('click', function () {
+    /**
+     * 更改中心点坐标
+     */
+    // const targetPoint: IPoint = {
+    //     ...squareGroup.pointCenter,
+    //     y: squareGroup.pointCenter.y + 1
+    // };
+
+    // TerisRule.move(squareGroup, targetPoint);
+    TerisRule.move(squareGroup, Direction.dwon);
+})
+
+
 
 
 

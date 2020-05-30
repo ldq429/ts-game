@@ -4,7 +4,7 @@ import { Square } from "./Square";
 /*
  * @Author: your name
  * @Date: 2020-05-28 19:24:54
- * @LastEditTime: 2020-05-28 21:13:37
+ * @LastEditTime: 2020-05-30 08:27:37
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/SquareGroup.ts
@@ -23,7 +23,7 @@ export class SquareGroup {
     get pointCenter() {
         return this._pointCenter;
     }
-    
+
     /**
      * 中心点的访问器设置
      * 1.设置中心点坐标
@@ -43,6 +43,10 @@ export class SquareGroup {
         })
     }
 
+    get shape() {
+        return this._shape;
+    }
+    
     constructor(
         /**
          * 方块组合的形状
