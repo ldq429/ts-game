@@ -4,7 +4,7 @@ import { SquareGroup } from "./SquareGroup";
 /*
  * @Author: your name
  * @Date: 2020-05-30 07:14:13
- * @LastEditTime: 2020-05-30 10:33:49
+ * @LastEditTime: 2020-05-30 16:50:09
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/TerisRule.ts
@@ -92,6 +92,18 @@ export class TerisRule {
                 }
             }
             return this.move(squareGroup, targetPoint);
+        }
+    }
+    /**
+     * 是否能够旋转，如果能够旋转，则旋转返回true，否则 返回false
+     */
+    static rotate(squareGroup: SquareGroup): boolean {
+        const newShape = squareGroup.afterRotateShape();
+        if (this.canIMove(newShape, squareGroup.pointCenter)) {
+            squareGroup.route();
+            return true
+        } else {
+            return false;
         }
     }
 }

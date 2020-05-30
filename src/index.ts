@@ -7,7 +7,7 @@ import { IpcNetConnectOpts } from "net";
 /*
  * @Author: your name
  * @Date: 2020-05-24 09:35:32
- * @LastEditTime: 2020-05-30 10:21:48
+ * @LastEditTime: 2020-05-30 16:51:17
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/index.js
@@ -25,9 +25,11 @@ squareGroup.squareGroup.forEach(sq => {
 const moveLeft: HTMLElement = document.getElementById('moveLeft') as HTMLElement;
 const moveDown: HTMLElement = document.getElementById('moveDown') as HTMLElement;
 const moveRight: HTMLElement = document.getElementById('moveRight') as HTMLElement;
+const rotate: HTMLElement = document.getElementById('rotate') as HTMLElement;
 
-
-
+rotate.addEventListener('click', function () {
+    TerisRule.rotate(squareGroup);
+})
 
 moveLeft.addEventListener('click', function () {
     /**

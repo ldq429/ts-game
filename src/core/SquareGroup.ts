@@ -4,7 +4,7 @@ import { Square } from "./Square";
 /*
  * @Author: your name
  * @Date: 2020-05-28 19:24:54
- * @LastEditTime: 2020-05-30 08:27:37
+ * @LastEditTime: 2020-05-30 16:33:12
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/SquareGroup.ts
@@ -35,18 +35,54 @@ export class SquareGroup {
          * 访问器被访问说明 中心点在改变
          * 设置整体组的相对移动,设置小方块的新位置
          */
-        this._shape.forEach((p, i) => {
-            this._squareGroup[i].point = {
-                x: p.x + point.x,
-                y: p.y + point.y
-            };
-        })
+        this.setSquareOpint();
     }
 
     get shape() {
         return this._shape;
     }
-    
+
+    // true , false  顺时针 ，逆时针
+    protected isClock = true;
+
+    /**
+     * 旋转之后的得到新的形状
+     */
+    afterRotateShape(): IPoint[] {
+        if (this.isClock) {
+            return this._shape.map(point => {
+                return {
+                    x: - point.y,
+                    y: point.x
+                }
+            })
+        } else {
+            return this._shape.map(point => {
+                return {
+                    x: point.y,
+                    y: -point.x
+                }
+            })
+        }
+    }
+    /**
+     * 旋转方法
+     */
+    route() {
+        this._shape = this.afterRotateShape();
+        this.setSquareOpint();
+    }
+    /**
+     * 根据中心点坐标，形状， 设置方块的坐标
+     */
+    private setSquareOpint() {
+        this._shape.forEach((p, i) => {
+            this._squareGroup[i].point = {
+                x: p.x + this._pointCenter.x,
+                y: p.y + this._pointCenter.y
+            };
+        })
+    }
     constructor(
         /**
          * 方块组合的形状
