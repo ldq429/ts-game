@@ -5,7 +5,7 @@ import pointConfig from "./pointConfig";
 /*
  * @Author: lu
  * @Date: 2020-05-27 09:34:10
- * @LastEditTime: 2020-05-27 11:20:56
+ * @LastEditTime: 2020-06-01 09:57:20
  * @LastEditors: Please set LastEditors
  * @Description: 用于显示小方块到浏览器上
  * @FilePath: /ts-game/src/core/BroswerLog.ts
@@ -33,14 +33,14 @@ export class BroswerLog implements IView {
             return;
         }
         /**
-         * 创建dom对象不变的属性
+         * 创建dom对象不可变的属性
          */
         if (!this.dom) {
             this.dom = document.createElement('div');
             this.dom.style.position = 'absolute';
             this.dom.style.width = pointConfig.squareSize.width + 'px';
             this.dom.style.height = pointConfig.squareSize.height + 'px';
-            this.dom.style.border = "1px solid #ccc";
+            this.dom.style.border = "1px solid #ffffff";
             this.dom.style.boxSizing = "border-box";
         }
         /**
@@ -53,7 +53,7 @@ export class BroswerLog implements IView {
         this.dom.style.left = this.square.point.x * pointConfig.squareSize.width + 'px';
         this.dom.style.top = this.square.point.y * pointConfig.squareSize.height + 'px';
         this.dom.style.backgroundColor = this.square.color;
-
+        
     }
     /**
      * 移除方块

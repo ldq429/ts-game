@@ -1,7 +1,9 @@
+import { SquareGroup } from "./SquareGroup";
+
 /*
  * @Author: your name
  * @Date: 2020-05-26 10:10:44
- * @LastEditTime: 2020-05-30 09:52:11
+ * @LastEditTime: 2020-06-01 07:33:31
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/types.ts
@@ -24,4 +26,24 @@ export enum Direction {
     left,
     right,
     dwon
+}
+
+export enum GameStatus {
+    init, // 未开始
+    playing, // 进行中
+    pause, // 暂停
+    gameOver // 游戏结束
+}
+
+export interface IGameView {
+    /**
+     * 显示下一个俄罗斯方块
+     * @param nextTeris : 下一个俄罗斯方块
+     */
+    showNext(nextTeris: SquareGroup): void;
+    /**
+     * 切换的俄罗斯方块
+     * @param currentTeris : 切换的当前的俄罗斯方块
+     */
+    switchShow(currentTeris: SquareGroup): void;
 }

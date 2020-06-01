@@ -1,7 +1,7 @@
 <!--
  * @Author: your name
  * @Date: 2020-05-24 09:38:12
- * @LastEditTime: 2020-05-30 14:58:08
+ * @LastEditTime: 2020-06-01 10:37:07
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/public/index.html
@@ -21,23 +21,48 @@
         }
 
         #root {
+            margin: 20px auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        #panel {
             position: relative;
-            padding: 0;
-            margin: 0;
             width: 300px;
-            height: 300px;
+            height: 450px;
             background-color: rgb(0, 0, 0);
-            margin: auto;
+        }
+
+        #nextSq {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .btns {
+            text-align: center;
         }
     </style>
 </head>
 
 <body>
-    <div id="root"></div>
-    <button id="moveLeft">向左移动</button>
-    <button id="moveDown">向下移动</button>
-    <button id="moveRight">向右移动</button>
-    <button id="rotate">旋转</button>
+    <div id="root">
+        <div id="panel"></div>
+
+        <div id="tips">
+            <div id="nextSq"></div>
+        </div>
+
+    </div>
+    <div class="btns">
+        <button id="start">开始</button>
+        <button id="pause">暂停</button>
+        <button id="moveLeft">向左移动</button>
+        <button id="moveDown">向下移动</button>
+        <button id="moveRight">向右移动</button>
+        <button id="rotate">旋转</button>
+    </div>
+
     <!-- <button id="clearSquare">移除方块</button>
     <button id="addSquare">添加显示者</button> -->
 </body>

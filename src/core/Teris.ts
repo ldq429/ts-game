@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 08:34:15
- * @LastEditTime: 2020-05-30 16:38:49
+ * @LastEditTime: 2020-05-31 15:16:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/Teris.ts
@@ -127,10 +127,10 @@ const shapeArray = [
  * 随机产生一个 俄罗斯方块（squareGroup）
  * @param centerPoint 
  */
-export function createSquareGroup(centerPoint: IPoint): SquareGroup {
+export function createTeris(centerPoint: IPoint): SquareGroup {
     const index = createRandom(0, shapeArray.length);
     const color = createColor();
-    const TempShapeGroup = shapeArray[index];
-    const squareGroup = new TempShapeGroup(centerPoint, color);
-    return squareGroup;
+    const TempTeris = shapeArray[index];
+    const Teris = new TempTeris(centerPoint, color);
+    return Teris;
 }
