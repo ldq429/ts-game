@@ -5,7 +5,7 @@ import { Square } from "./Square";
 /*
  * @Author: your name
  * @Date: 2020-05-30 07:14:13
- * @LastEditTime: 2020-06-01 17:37:13
+ * @LastEditTime: 2020-06-02 16:06:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/TerisRule.ts
@@ -49,11 +49,12 @@ export class TerisRule {
          * 左右 下 判断是否超出边界， 如果 没有超出边界则返回false
          */
         let resp = targetSquarePoint.some(point => {
-            const conditionLeftRight = point.x < 0 || point.x > gameConfig.panelSize.width - 1;
-            const conditionDown = point.y > gameConfig.panelSize.height - 1;
+            const conditionLeftRight = point.x < 0 || (point.x > gameConfig.panelSize.width - 1);
+            const conditionDown = point.y > (gameConfig.panelSize.height - 1);
             const result = conditionLeftRight || conditionDown;
             return result;
         })
+
         // 如果 resp 为 ture 说明 有超出边界情况 ，不能移动 所以返回false
         if (resp) {
             return false;
@@ -64,6 +65,7 @@ export class TerisRule {
         if (resp) {
             return false;
         }
+
         return true;
 
     }
@@ -109,6 +111,7 @@ export class TerisRule {
     static rotate(tries: SquareGroup, exists: Square[]): boolean {
         // 获得新形状
         const newShape = tries.afterRotateShape();
+        console.log('newShape', newShape);
         if (this.canIMove(newShape, tries.pointCenter, exists)) {
             tries.route();
             return true;
@@ -120,5 +123,55 @@ export class TerisRule {
     static fastDown(tries: SquareGroup, exists: Square[]) {
         while (this.move(tries, Direction.dwon, exists)) { }
     }
+
+    /**
+     * 已存在的方块中进行消除
+     * @param exists 
+     */
+    static deleteSquare(exists: Square[]): number {
+        // 1.获取数组中最小的y坐标和最大的y坐标
+        const yArray: number[] = exists.map(sq => {
+            return sq.point.y
+        })
+        const maxY = Math.max(...yArray);
+        const minY = Math.min(...yArray);
+        // 2. 循环判断每一行是否可以消除
+        let count: number = 0;
+        for (let y = minY; y <= maxY; y++) {
+            if (this._deleteLine(exists, y)) {
+                count++;
+            }
+        }
+        return count;
+    }
+    /**
+     *  消除一行方块
+     */
+    private static _deleteLine(exists: Square[], y: number): boolean {
+        // 得到改行的所有方块
+        const squares: Square[] = exists.filter(sq => sq.point.y === y);
+        console.log(squares.length, gameConfig.panelSize.width);
+        if (squares.length === gameConfig.panelSize.width) {
+            // 游戏界面消除该行
+            squares.forEach(sq => {
+                // 1.square的显示关掉
+                sq.view!.remove();
+                // 剩下的y坐标比当前y坐标小的 都 + 1
+                exists.filter(sq => sq.point.y < y).forEach(sq => {
+                    sq.point = {
+                        x: sq.point.x,
+                        y: sq.point.y + 1
+                    }
+                })
+                // 移除exists数组中的方块
+                const index: number = exists.indexOf(sq);
+                exists.splice(index, 1)
+            })
+            return true;
+            // exists中消除
+        }
+        return false;
+    }
 }
+
 

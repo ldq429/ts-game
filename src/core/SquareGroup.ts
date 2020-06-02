@@ -4,7 +4,7 @@ import { Square } from "./Square";
 /*
  * @Author: your name
  * @Date: 2020-05-28 19:24:54
- * @LastEditTime: 2020-05-30 16:33:12
+ * @LastEditTime: 2020-06-02 16:01:19
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/SquareGroup.ts
@@ -52,7 +52,7 @@ export class SquareGroup {
         if (this.isClock) {
             return this._shape.map(point => {
                 return {
-                    x: - point.y,
+                    x: -point.y,
                     y: point.x
                 }
             })

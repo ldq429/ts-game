@@ -1,9 +1,10 @@
 import { SquareGroup } from "./SquareGroup";
+import { Game } from "./Game";
 
 /*
  * @Author: your name
  * @Date: 2020-05-26 10:10:44
- * @LastEditTime: 2020-06-01 07:33:31
+ * @LastEditTime: 2020-06-02 12:00:44
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/types.ts
@@ -46,4 +47,7 @@ export interface IGameView {
      * @param currentTeris : 切换的当前的俄罗斯方块
      */
     switchShow(currentTeris: SquareGroup): void;
+
+    init(game: Game): void;
+    // showScore(score: number): void;
 }

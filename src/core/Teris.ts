@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 08:34:15
- * @LastEditTime: 2020-05-31 15:16:44
+ * @LastEditTime: 2020-06-02 15:49:18
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/Teris.ts
@@ -121,6 +121,9 @@ export class LineShape extends SquareGroup {
 const shapeArray = [
     TShape, LShape, TMirrorShape, SShape, SMirrorShape, SquareShape, LineShape
 ]
+// const shapeArray = [
+//     SquareShape
+// ]
 
 
 /**
