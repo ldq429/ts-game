@@ -5,7 +5,7 @@ import { Square } from "./Square";
 /*
  * @Author: your name
  * @Date: 2020-05-30 07:14:13
- * @LastEditTime: 2020-06-02 16:06:04
+ * @LastEditTime: 2020-06-03 07:08:42
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/TerisRule.ts
@@ -156,16 +156,16 @@ export class TerisRule {
             squares.forEach(sq => {
                 // 1.square的显示关掉
                 sq.view!.remove();
-                // 剩下的y坐标比当前y坐标小的 都 + 1
-                exists.filter(sq => sq.point.y < y).forEach(sq => {
-                    sq.point = {
-                        x: sq.point.x,
-                        y: sq.point.y + 1
-                    }
-                })
-                // 移除exists数组中的方块
+                // 2.移除exists数组中的方块
                 const index: number = exists.indexOf(sq);
                 exists.splice(index, 1)
+            })
+            // 剩下的y坐标比当前y坐标小的 都 + 1
+            exists.filter(sq => sq.point.y < y).forEach(sq => {
+                sq.point = {
+                    x: sq.point.x,
+                    y: sq.point.y + 1
+                }
             })
             return true;
             // exists中消除
