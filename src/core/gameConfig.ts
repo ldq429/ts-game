@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-30 07:37:57
- * @LastEditTime: 2020-06-03 19:39:18
+ * @LastEditTime: 2020-06-03 19:55:29
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/gameConfig.ts
@@ -12,8 +12,8 @@ export const gameConfig = {
      * 左侧面板大小
      */
     panelSize: {
-        width: 8,
-        height: 16
+        width: 10,
+        height: 18
     },
     /**
      * 右侧面板大小

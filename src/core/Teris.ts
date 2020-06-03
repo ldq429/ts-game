@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 08:34:15
- * @LastEditTime: 2020-06-03 18:36:45
+ * @LastEditTime: 2020-06-03 20:04:46
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/Teris.ts
@@ -72,7 +72,7 @@ export class SMirrorShape extends SquareGroup {
         _color: string
     ) {
         super(
-            [{ x: 0, y: 0 }, { x: -1, y: 0 }, { x: 0, y: 1 }, { x: 1, y: 1 }],
+            [{ x: 0, y: 0 }, { x: -1, y: 0 },{ x: 0, y: 1 },{ x: 1, y: 1 }],
             _pointCenter,
             _color
         )
@@ -121,6 +121,7 @@ export class LineShape extends SquareGroup {
 const shapeArray = [
     TShape, LShape, TMirrorShape, SShape, SMirrorShape, SquareShape, LineShape
 ]
+
 
 /**
  * 随机产生一个 俄罗斯方块（squareGroup）
