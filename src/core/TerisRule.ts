@@ -5,7 +5,7 @@ import { Square } from "./Square";
 /*
  * @Author: your name
  * @Date: 2020-05-30 07:14:13
- * @LastEditTime: 2020-06-03 07:08:42
+ * @LastEditTime: 2020-06-03 18:56:08
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/TerisRule.ts
@@ -111,7 +111,6 @@ export class TerisRule {
     static rotate(tries: SquareGroup, exists: Square[]): boolean {
         // 获得新形状
         const newShape = tries.afterRotateShape();
-        console.log('newShape', newShape);
         if (this.canIMove(newShape, tries.pointCenter, exists)) {
             tries.route();
             return true;
@@ -150,7 +149,6 @@ export class TerisRule {
     private static _deleteLine(exists: Square[], y: number): boolean {
         // 得到改行的所有方块
         const squares: Square[] = exists.filter(sq => sq.point.y === y);
-        console.log(squares.length, gameConfig.panelSize.width);
         if (squares.length === gameConfig.panelSize.width) {
             // 游戏界面消除该行
             squares.forEach(sq => {

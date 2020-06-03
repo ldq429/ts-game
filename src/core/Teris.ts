@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 08:34:15
- * @LastEditTime: 2020-06-02 15:49:18
+ * @LastEditTime: 2020-06-03 18:36:45
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/Teris.ts
@@ -121,10 +121,6 @@ export class LineShape extends SquareGroup {
 const shapeArray = [
     TShape, LShape, TMirrorShape, SShape, SMirrorShape, SquareShape, LineShape
 ]
-// const shapeArray = [
-//     SquareShape
-// ]
-
 
 /**
  * 随机产生一个 俄罗斯方块（squareGroup）

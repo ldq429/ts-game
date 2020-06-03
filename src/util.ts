@@ -1,7 +1,7 @@
 /*
  * @Author: your name
  * @Date: 2020-05-29 08:52:06
- * @LastEditTime: 2020-05-29 09:15:58
+ * @LastEditTime: 2020-06-03 19:37:05
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/utils.ts
@@ -21,7 +21,7 @@ export function createRandom(min: number, max: number): number {
 
 export function createColor(): string {
     const colorArray: string[] = [
-        '#FF79BC', '#BE77FF', '#79FF79', '#79FF79', '#FFFF93', '#81C0C0'
+        '#53868B', '#66CD00', '#CD5C5C', '#FF00FF', '#912CEE', '#008B8B'
     ]
     const index: number = createRandom(0, colorArray.length);
     return colorArray[index];

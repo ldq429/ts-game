@@ -2,14 +2,13 @@ import { GameStatus, Direction, IGameView } from "./types";
 import { createTeris } from './Teris';
 import { SquareGroup } from "./SquareGroup";
 import { TerisRule } from "./TerisRule";
-import pointConfig from "./views/pointConfig";
 import { gameConfig } from "./gameConfig";
 import { Square } from "./Square";
 
 /*
  * @Author: your name
  * @Date: 2020-05-31 07:16:01
- * @LastEditTime: 2020-06-03 07:12:16
+ * @LastEditTime: 2020-06-03 19:30:51
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: /ts-game/src/core/Game.ts
@@ -17,6 +16,13 @@ import { Square } from "./Square";
 export class Game {
     // 当前的游戏状态
     private _gemeStatus: GameStatus = GameStatus.init;
+
+    get gemeStatus() {
+        return this._gemeStatus;
+    }
+    set gemeStatus(val) {
+        this._gemeStatus = val;
+    }
     // 当前的俄罗斯方块， 有可能不存在
     private _currentTeris?: SquareGroup;
     // 下一个要显示的俄罗斯方块
@@ -24,17 +30,40 @@ export class Game {
     // 下落时间的定时器
     private _timer?: number;
     // 下落时间间隔
-    private _duration: number = 1000;
+    private _duration: number = 1500;
     // 当前游戏中已经存在的方块
     private _exists: Square[] = [];
 
     private _score: number = 0;
+
+    get score() {
+        return this._score;
+    }
+
+    set score(val) {
+        this._score = val;
+        this._gameView.showScore(this._score);
+        // 改变分数后 属于哪个级别
+        const level = gameConfig.levels.filter(op => {
+            return this._score >= op.score
+        }).pop();
+
+        const tempDuration = level!.duration ? level!.duration : this._duration;
+        if (tempDuration === this._duration) {
+            return;
+        }
+        clearInterval(this._timer);
+        this._duration = tempDuration;
+        this._timer = undefined;
+        this._freeFall();
+    }
 
     // 在构造函数中 使用显示
     constructor(private _gameView: IGameView) {
         _gameView.init(this);
         // 显示下一个方块
         this._createNext();
+        this._gameView.showScore(this._score);
     }
 
     /**
@@ -57,16 +86,16 @@ export class Game {
     private _addScore(num: number): void {
         switch (num) {
             case 1:
-                this._score += 10
+                this.score += 10
                 break;
             case 2:
-                this._score += 20
+                this.score += 20
                 break;
             case 3:
-                this._score += 30
+                this.score += 30
                 break;
             case 4:
-                this._score += 40
+                this.score += 40
                 break;
             default:
                 return;
@@ -106,7 +135,7 @@ export class Game {
         this._exists = [];
         this._createNext();
         this._currentTeris = undefined;
-        this._score = 0;
+        this.score = 0;
     }
     /**
      * 切换方块
@@ -125,6 +154,7 @@ export class Game {
             this._currentTeris!.squareGroup.forEach(sq => {
                 sq.view!.remove();
             })
+            this._gameView.onGameOver();
             return;
         }
         // 使用显示 并且切换显示
@@ -169,6 +199,7 @@ export class Game {
         }
         // 自由下落
         this._freeFall();
+        this._gameView.onGameStart();
     }
     /**
      * 游戏暂停
@@ -179,6 +210,7 @@ export class Game {
             clearInterval(this._timer);
             this._timer = undefined;
         }
+        this._gameView.onGamePuase()
     }
     /**
      * 方块向左移动
